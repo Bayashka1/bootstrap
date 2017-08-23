@@ -211,7 +211,7 @@ var ScrollSpy = function ($) {
       }
 
       for (var i = this._offsets.length; i--;) {
-        var isActiveTarget = this._activeTarget !== this._targets[i] && scrollTop >= this._offsets[i] && (this._offsets[i + 1] === undefined || scrollTop < this._offsets[i + 1]);
+        var isActiveTarget = this._activeTarget !== this._targets[i] && scrollTop >= this._offsets[i] && (typeof this._offsets[i + 1] === 'undefined' || scrollTop < this._offsets[i + 1]);
 
         if (isActiveTarget) {
           this._activate(this._targets[i]);
@@ -225,6 +225,7 @@ var ScrollSpy = function ($) {
       this._clear();
 
       var queries = this._selector.split(',');
+      // eslint-disable-next-line arrow-body-style
       queries = queries.map(function (selector) {
         return selector + '[data-target="' + target + '"],' + (selector + '[href="' + target + '"]');
       });
@@ -264,7 +265,7 @@ var ScrollSpy = function ($) {
         }
 
         if (typeof config === 'string') {
-          if (data[config] === undefined) {
+          if (typeof data[config] === 'undefined') {
             throw new Error('No method named "' + config + '"');
           }
           data[config]();

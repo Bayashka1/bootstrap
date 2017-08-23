@@ -68,7 +68,7 @@ var Util = function ($) {
         if ($(event.target).is(this)) {
           return event.handleObj.handler.apply(this, arguments); // eslint-disable-line prefer-rest-params
         }
-        return undefined;
+        return undefined; // eslint-disable-line no-undefined
       }
     };
   }
@@ -81,7 +81,7 @@ var Util = function ($) {
     var el = document.createElement('bootstrap');
 
     for (var name in TransitionEndEvent) {
-      if (el.style[name] !== undefined) {
+      if (typeof el.style[name] !== 'undefined') {
         return {
           end: TransitionEndEvent[name]
         };
@@ -160,7 +160,7 @@ var Util = function ($) {
     },
     typeCheckConfig: function typeCheckConfig(componentName, config, configTypes) {
       for (var property in configTypes) {
-        if (configTypes.hasOwnProperty(property)) {
+        if (Object.prototype.hasOwnProperty.call(configTypes, property)) {
           var expectedTypes = configTypes[property];
           var value = config[property];
           var valueType = value && isElement(value) ? 'element' : toType(value);
@@ -949,7 +949,7 @@ var Carousel = function ($) {
         if (typeof config === 'number') {
           data.to(config);
         } else if (typeof action === 'string') {
-          if (data[action] === undefined) {
+          if (typeof data[action] === 'undefined') {
             throw new Error('No method named "' + action + '"');
           }
           data[action]();
@@ -1336,7 +1336,7 @@ var Collapse = function ($) {
         }
 
         if (typeof config === 'string') {
-          if (data[config] === undefined) {
+          if (typeof data[config] === 'undefined') {
             throw new Error('No method named "' + config + '"');
           }
           data[config]();
@@ -1585,7 +1585,7 @@ var Dropdown = function ($) {
 
     Dropdown.prototype._getConfig = function _getConfig(config) {
       var elementData = $(this._element).data();
-      if (elementData.placement !== undefined) {
+      if (typeof elementData.placement !== 'undefined') {
         elementData.placement = AttachmentMap[elementData.placement.toUpperCase()];
       }
 
@@ -1658,7 +1658,7 @@ var Dropdown = function ($) {
         }
 
         if (typeof config === 'string') {
-          if (data[config] === undefined) {
+          if (typeof data[config] === 'undefined') {
             throw new Error('No method named "' + config + '"');
           }
           data[config]();
@@ -2315,7 +2315,7 @@ var Modal = function ($) {
         }
 
         if (typeof config === 'string') {
-          if (data[config] === undefined) {
+          if (typeof data[config] === 'undefined') {
             throw new Error('No method named "' + config + '"');
           }
           data[config](relatedTarget);
@@ -2601,7 +2601,7 @@ var ScrollSpy = function ($) {
       }
 
       for (var i = this._offsets.length; i--;) {
-        var isActiveTarget = this._activeTarget !== this._targets[i] && scrollTop >= this._offsets[i] && (this._offsets[i + 1] === undefined || scrollTop < this._offsets[i + 1]);
+        var isActiveTarget = this._activeTarget !== this._targets[i] && scrollTop >= this._offsets[i] && (typeof this._offsets[i + 1] === 'undefined' || scrollTop < this._offsets[i + 1]);
 
         if (isActiveTarget) {
           this._activate(this._targets[i]);
@@ -2615,6 +2615,7 @@ var ScrollSpy = function ($) {
       this._clear();
 
       var queries = this._selector.split(',');
+      // eslint-disable-next-line arrow-body-style
       queries = queries.map(function (selector) {
         return selector + '[data-target="' + target + '"],' + (selector + '[href="' + target + '"]');
       });
@@ -2654,7 +2655,7 @@ var ScrollSpy = function ($) {
         }
 
         if (typeof config === 'string') {
-          if (data[config] === undefined) {
+          if (typeof data[config] === 'undefined') {
             throw new Error('No method named "' + config + '"');
           }
           data[config]();
@@ -2922,7 +2923,7 @@ var Tab = function ($) {
         }
 
         if (typeof config === 'string') {
-          if (data[config] === undefined) {
+          if (typeof data[config] === 'undefined') {
             throw new Error('No method named "' + config + '"');
           }
           data[config]();
@@ -3334,7 +3335,8 @@ var Tooltip = function ($) {
     };
 
     Tooltip.prototype.getTipElement = function getTipElement() {
-      return this.tip = this.tip || $(this.config.template)[0];
+      this.tip = this.tip || $(this.config.template)[0];
+      return this.tip;
     };
 
     Tooltip.prototype.setContent = function setContent() {
@@ -3578,7 +3580,7 @@ var Tooltip = function ($) {
         }
 
         if (typeof config === 'string') {
-          if (data[config] === undefined) {
+          if (typeof data[config] === 'undefined') {
             throw new Error('No method named "' + config + '"');
           }
           data[config]();
@@ -3725,7 +3727,8 @@ var Popover = function ($) {
     };
 
     Popover.prototype.getTipElement = function getTipElement() {
-      return this.tip = this.tip || $(this.config.template)[0];
+      this.tip = this.tip || $(this.config.template)[0];
+      return this.tip;
     };
 
     Popover.prototype.setContent = function setContent() {
@@ -3769,7 +3772,7 @@ var Popover = function ($) {
         }
 
         if (typeof config === 'string') {
-          if (data[config] === undefined) {
+          if (typeof data[config] === 'undefined') {
             throw new Error('No method named "' + config + '"');
           }
           data[config]();

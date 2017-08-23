@@ -40,7 +40,7 @@ var Util = function ($) {
         if ($(event.target).is(this)) {
           return event.handleObj.handler.apply(this, arguments); // eslint-disable-line prefer-rest-params
         }
-        return undefined;
+        return undefined; // eslint-disable-line no-undefined
       }
     };
   }
@@ -53,7 +53,7 @@ var Util = function ($) {
     var el = document.createElement('bootstrap');
 
     for (var name in TransitionEndEvent) {
-      if (el.style[name] !== undefined) {
+      if (typeof el.style[name] !== 'undefined') {
         return {
           end: TransitionEndEvent[name]
         };
@@ -132,7 +132,7 @@ var Util = function ($) {
     },
     typeCheckConfig: function typeCheckConfig(componentName, config, configTypes) {
       for (var property in configTypes) {
-        if (configTypes.hasOwnProperty(property)) {
+        if (Object.prototype.hasOwnProperty.call(configTypes, property)) {
           var expectedTypes = configTypes[property];
           var value = config[property];
           var valueType = value && isElement(value) ? 'element' : toType(value);

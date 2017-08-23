@@ -191,7 +191,7 @@ var Dropdown = function ($) {
 
     Dropdown.prototype._getConfig = function _getConfig(config) {
       var elementData = $(this._element).data();
-      if (elementData.placement !== undefined) {
+      if (typeof elementData.placement !== 'undefined') {
         elementData.placement = AttachmentMap[elementData.placement.toUpperCase()];
       }
 
@@ -264,7 +264,7 @@ var Dropdown = function ($) {
         }
 
         if (typeof config === 'string') {
-          if (data[config] === undefined) {
+          if (typeof data[config] === 'undefined') {
             throw new Error('No method named "' + config + '"');
           }
           data[config]();

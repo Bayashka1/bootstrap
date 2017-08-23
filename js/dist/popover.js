@@ -91,7 +91,8 @@ var Popover = function ($) {
     };
 
     Popover.prototype.getTipElement = function getTipElement() {
-      return this.tip = this.tip || $(this.config.template)[0];
+      this.tip = this.tip || $(this.config.template)[0];
+      return this.tip;
     };
 
     Popover.prototype.setContent = function setContent() {
@@ -135,7 +136,7 @@ var Popover = function ($) {
         }
 
         if (typeof config === 'string') {
-          if (data[config] === undefined) {
+          if (typeof data[config] === 'undefined') {
             throw new Error('No method named "' + config + '"');
           }
           data[config]();

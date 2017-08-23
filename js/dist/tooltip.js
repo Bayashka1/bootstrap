@@ -369,7 +369,8 @@ var Tooltip = function ($) {
     };
 
     Tooltip.prototype.getTipElement = function getTipElement() {
-      return this.tip = this.tip || $(this.config.template)[0];
+      this.tip = this.tip || $(this.config.template)[0];
+      return this.tip;
     };
 
     Tooltip.prototype.setContent = function setContent() {
@@ -613,7 +614,7 @@ var Tooltip = function ($) {
         }
 
         if (typeof config === 'string') {
-          if (data[config] === undefined) {
+          if (typeof data[config] === 'undefined') {
             throw new Error('No method named "' + config + '"');
           }
           data[config]();
