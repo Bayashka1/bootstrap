@@ -26,6 +26,7 @@ module.exports = (ctx) => ({
         'Android >= 4.4',
         'Opera >= 30'
       ]
-    }
+    },
+    'css-mqpacker': {}
   }
 })
